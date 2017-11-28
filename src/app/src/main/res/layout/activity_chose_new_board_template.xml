@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="br.com.bhr.hammerboard.ui.newboard.ChoseNewBoardTemplateActivity">
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="br.com.bhr.hammerboard.ui.newboard.ChoseNewBoardTemplateActivity"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +53,9 @@
                     android:id="@+id/etBoardName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="board name"/>
+                    android:hint="board name"
+                    android:singleLine="true"
+                    />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
@@ -87,6 +92,22 @@
             </LinearLayout>
 
         </HorizontalScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:text="create board"
+            android:onClick="onCreateNewBoardTouched"/>
     </LinearLayout>
 
 </LinearLayout>
