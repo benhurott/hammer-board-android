@@ -2,6 +2,7 @@ package br.com.bhr.hammerboard.core;
 
 import br.com.bhr.hammerboard.domain.board.BoardRepository;
 import br.com.bhr.hammerboard.domain.board.newboard.NewBoardService;
+import br.com.bhr.hammerboard.infra.repository.firebase.BoardRepositoryFIR;
 import br.com.bhr.hammerboard.infra.repository.mock.BoardRepositoryMock;
 
 /**
@@ -21,7 +22,7 @@ public class DependencyManager {
     private BoardRepository boardRepository;
     private BoardRepository getBoardRepository() {
         if (this.boardRepository == null) {
-            this.boardRepository = new BoardRepositoryMock();
+            this.boardRepository = new BoardRepositoryFIR();
         }
 
         return this.boardRepository;
