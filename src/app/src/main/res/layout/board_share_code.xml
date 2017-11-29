@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_board_share_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1234567890"
+        android:textSize="40dp"
+        android:textColor="@color/colorAccent"
+        />
+
+</LinearLayout>

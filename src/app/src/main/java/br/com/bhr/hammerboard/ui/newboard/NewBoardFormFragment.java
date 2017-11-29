@@ -37,6 +37,8 @@ public class NewBoardFormFragment extends Fragment {
 
     private BoardTemplateType selectedTemplate = null;
 
+    private Listener listener;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,7 +73,11 @@ public class NewBoardFormFragment extends Fragment {
         this.boardTeamToolsProductOthers.setOnClickListener(onTemplateTouched);
     }
 
-    public void onSelectBoardTemplate(View view) {
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    private void onSelectBoardTemplate(View view) {
         this.deselectAllTemplates();
 
         switch (view.getId()) {
@@ -94,14 +100,15 @@ public class NewBoardFormFragment extends Fragment {
         this.setTemplateAsSelected(view);
     }
 
-    public void onCreateNewBoardTouched() {
+    private void onCreateNewBoardTouched() {
         NewBoardModel model = new NewBoardModel(this.boardName.getText().toString(), this.selectedTemplate);
         NewBoardService newBoardService = DependencyManager.getInstance().getNewBoardService();
 
         newBoardService.createNewBoard(model, new ActionResult<BoardException, BoardEntity>() {
             @Override
             public void onSuccess(BoardEntity result) {
-                Toast.makeText(NewBoardFormFragment.this.getActivity(), "Board " + result.getName() + " created!" , Toast.LENGTH_SHORT).show();
+
+                listener.onBoardCreated(result);
             }
 
             @Override
@@ -124,5 +131,9 @@ public class NewBoardFormFragment extends Fragment {
         this.boardPositiveNegative.setBackgroundColor(color);
         this.boardPositiveNegativeNewIdeas.setBackgroundColor(color);
         this.boardTeamToolsProductOthers.setBackgroundColor(color);
+    }
+
+    public interface Listener {
+        void onBoardCreated(BoardEntity board);
     }
 }
