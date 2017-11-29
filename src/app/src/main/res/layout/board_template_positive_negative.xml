@@ -6,7 +6,6 @@
     android:layout_marginRight="20dp"
     android:background="@color/colorUltraLightGray"
     android:orientation="vertical"
-    android:onClick="onSelectBoardTemplate"
     android:id="@+id/board_positive_negative">
 
     <LinearLayout

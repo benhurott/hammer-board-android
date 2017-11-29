@@ -19,7 +19,7 @@ public class DependencyManager {
     }
 
     private BoardRepository boardRepository;
-    public BoardRepository getBoardRepository() {
+    private BoardRepository getBoardRepository() {
         if (this.boardRepository == null) {
             this.boardRepository = new BoardRepositoryMock();
         }
