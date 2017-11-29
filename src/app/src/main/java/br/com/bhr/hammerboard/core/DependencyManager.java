@@ -1,7 +1,7 @@
 package br.com.bhr.hammerboard.core;
 
 import br.com.bhr.hammerboard.domain.board.BoardRepository;
-import br.com.bhr.hammerboard.domain.board.NewBoardService;
+import br.com.bhr.hammerboard.domain.board.newboard.NewBoardService;
 import br.com.bhr.hammerboard.infra.repository.mock.BoardRepositoryMock;
 
 /**

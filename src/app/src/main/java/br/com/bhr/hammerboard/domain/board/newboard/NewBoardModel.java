@@ -1,4 +1,6 @@
-package br.com.bhr.hammerboard.domain.board;
+package br.com.bhr.hammerboard.domain.board.newboard;
+
+import br.com.bhr.hammerboard.domain.board.BoardTemplateType;
 
 /**
  * Created by ben on 28/11/2017.

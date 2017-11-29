@@ -13,8 +13,8 @@ import br.com.bhr.hammerboard.core.ActionResult;
 import br.com.bhr.hammerboard.core.DependencyManager;
 import br.com.bhr.hammerboard.domain.board.BoardException;
 import br.com.bhr.hammerboard.domain.board.BoardTemplateType;
-import br.com.bhr.hammerboard.domain.board.NewBoardModel;
-import br.com.bhr.hammerboard.domain.board.NewBoardService;
+import br.com.bhr.hammerboard.domain.board.newboard.NewBoardModel;
+import br.com.bhr.hammerboard.domain.board.newboard.NewBoardService;
 
 public class ChoseNewBoardTemplateActivity extends AppCompatActivity {
 

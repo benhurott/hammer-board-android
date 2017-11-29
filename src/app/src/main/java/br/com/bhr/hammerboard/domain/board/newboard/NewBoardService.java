@@ -1,6 +1,8 @@
-package br.com.bhr.hammerboard.domain.board;
+package br.com.bhr.hammerboard.domain.board.newboard;
 
 import br.com.bhr.hammerboard.core.ActionResult;
+import br.com.bhr.hammerboard.domain.board.BoardException;
+import br.com.bhr.hammerboard.domain.board.BoardRepository;
 
 /**
  * Created by ben on 28/11/2017.
