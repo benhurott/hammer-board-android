@@ -9,7 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import br.com.bhr.hammerboard.R;
+import br.com.bhr.hammerboard.core.ActionResult;
+import br.com.bhr.hammerboard.core.DependencyManager;
+import br.com.bhr.hammerboard.domain.board.BoardException;
 import br.com.bhr.hammerboard.domain.board.BoardTemplateType;
+import br.com.bhr.hammerboard.domain.board.NewBoardModel;
+import br.com.bhr.hammerboard.domain.board.NewBoardService;
 
 public class ChoseNewBoardTemplateActivity extends AppCompatActivity {
 
@@ -18,7 +23,6 @@ public class ChoseNewBoardTemplateActivity extends AppCompatActivity {
     private LinearLayout boardTeamToolsProductOthers;
 
     private EditText boardName;
-
 
     private BoardTemplateType selectedTemplate = null;
 
@@ -57,9 +61,21 @@ public class ChoseNewBoardTemplateActivity extends AppCompatActivity {
     }
 
     public void onCreateNewBoardTouched(View view) {
-        if (!this.validateForm()) {
-            return;
-        }
+        NewBoardModel model = new NewBoardModel(this.boardName.getText().toString(), this.selectedTemplate);
+        NewBoardService newBoardService = DependencyManager.getInstance().getNewBoardService();
+
+        newBoardService.createNewBoard(model, new ActionResult<BoardException, NewBoardModel>() {
+            @Override
+            public void onSuccess(NewBoardModel result) {
+                Toast.makeText(ChoseNewBoardTemplateActivity.this, "Board " + result.getName() + " created!" , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(BoardException e) {
+                Toast.makeText(ChoseNewBoardTemplateActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void setTemplateAsSelected(View view) {
@@ -75,28 +91,5 @@ public class ChoseNewBoardTemplateActivity extends AppCompatActivity {
         this.boardPositiveNegative.setBackgroundColor(color);
         this.boardPositiveNegativeNewIdeas.setBackgroundColor(color);
         this.boardTeamToolsProductOthers.setBackgroundColor(color);
-    }
-
-    private boolean validateForm() {
-        return this.validateBoardName()
-                && this.validateTemplate();
-    }
-
-    private boolean validateTemplate() {
-        if (this.selectedTemplate == null) {
-            Toast.makeText(this, "Please select a board template.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return true;
-    }
-
-    private boolean validateBoardName() {
-        if (this.boardName.getText().length() < 1) {
-            Toast.makeText(this, "The board name is required.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return true;
     }
 }
