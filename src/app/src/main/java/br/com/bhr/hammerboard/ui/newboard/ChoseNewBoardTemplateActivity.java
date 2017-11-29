@@ -30,7 +30,7 @@ public class ChoseNewBoardTemplateActivity extends AppCompatActivity implements 
         this.formFragment = new NewBoardFormFragment();
         this.formFragment.setListener(this);
 
-        this.formFragment.setExitTransition(new Slide(Gravity.LEFT));
+        this.formFragment.setExitTransition(new Slide(Gravity.BOTTOM));
 
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragment_content, formFragment);
@@ -45,7 +45,6 @@ public class ChoseNewBoardTemplateActivity extends AppCompatActivity implements 
     private void renderBoardCreated(BoardEntity board) {
         FragmentManager fm = getSupportFragmentManager();
         this.boardCreatedFragment = new NewBoardCreatedFragment();
-        this.boardCreatedFragment.setEnterTransition(new Slide(Gravity.RIGHT));
 
         Bundle args = new Bundle();
         args.putSerializable("board_created", board);
