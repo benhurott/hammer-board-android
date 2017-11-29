@@ -11,6 +11,7 @@ import android.widget.Toast;
 import br.com.bhr.hammerboard.R;
 import br.com.bhr.hammerboard.core.ActionResult;
 import br.com.bhr.hammerboard.core.DependencyManager;
+import br.com.bhr.hammerboard.domain.board.BoardEntity;
 import br.com.bhr.hammerboard.domain.board.BoardException;
 import br.com.bhr.hammerboard.domain.board.BoardTemplateType;
 import br.com.bhr.hammerboard.domain.board.newboard.NewBoardModel;
@@ -64,9 +65,9 @@ public class ChoseNewBoardTemplateActivity extends AppCompatActivity {
         NewBoardModel model = new NewBoardModel(this.boardName.getText().toString(), this.selectedTemplate);
         NewBoardService newBoardService = DependencyManager.getInstance().getNewBoardService();
 
-        newBoardService.createNewBoard(model, new ActionResult<BoardException, NewBoardModel>() {
+        newBoardService.createNewBoard(model, new ActionResult<BoardException, BoardEntity>() {
             @Override
-            public void onSuccess(NewBoardModel result) {
+            public void onSuccess(BoardEntity result) {
                 Toast.makeText(ChoseNewBoardTemplateActivity.this, "Board " + result.getName() + " created!" , Toast.LENGTH_SHORT).show();
             }
 

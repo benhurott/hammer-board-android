@@ -1,0 +1,31 @@
+package br.com.bhr.hammerboard.domain.board;
+
+import br.com.bhr.hammerboard.domain.board.BoardTemplateType;
+
+/**
+ * Created by ben on 28/11/2017.
+ */
+
+public class BoardEntity {
+    private String name;
+    private BoardTemplateType template;
+    private String shareCode;
+
+    public BoardEntity(String name, BoardTemplateType template, String shareCode) {
+        this.name = name;
+        this.template = template;
+        this.shareCode = shareCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public BoardTemplateType getTemplate() {
+        return template;
+    }
+
+    public String getShareCode() {
+        return shareCode;
+    }
+}
