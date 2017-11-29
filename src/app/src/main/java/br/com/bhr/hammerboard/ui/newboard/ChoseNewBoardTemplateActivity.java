@@ -1,13 +1,12 @@
 package br.com.bhr.hammerboard.ui.newboard;
 
-import android.graphics.drawable.GradientDrawable;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
+
+import android.transition.Slide;
+import android.view.Gravity;
 
 import br.com.bhr.hammerboard.R;
 import br.com.bhr.hammerboard.domain.board.BoardEntity;
@@ -15,6 +14,7 @@ import br.com.bhr.hammerboard.domain.board.BoardEntity;
 public class ChoseNewBoardTemplateActivity extends AppCompatActivity implements NewBoardFormFragment.Listener {
 
     private NewBoardFormFragment formFragment;
+    private NewBoardCreatedFragment boardCreatedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class ChoseNewBoardTemplateActivity extends AppCompatActivity implements 
         this.formFragment = new NewBoardFormFragment();
         this.formFragment.setListener(this);
 
+        this.formFragment.setExitTransition(new Slide(Gravity.LEFT));
+
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragment_content, formFragment);
         ft.commit();
@@ -37,6 +39,20 @@ public class ChoseNewBoardTemplateActivity extends AppCompatActivity implements 
 
     @Override
     public void onBoardCreated(BoardEntity board) {
-        Toast.makeText(this, "Board " + board.getName() + " created!" , Toast.LENGTH_SHORT).show();
+        this.renderBoardCreated(board);
+    }
+
+    private void renderBoardCreated(BoardEntity board) {
+        FragmentManager fm = getSupportFragmentManager();
+        this.boardCreatedFragment = new NewBoardCreatedFragment();
+        this.boardCreatedFragment.setEnterTransition(new Slide(Gravity.RIGHT));
+
+        Bundle args = new Bundle();
+        args.putSerializable("board_created", board);
+        this.boardCreatedFragment.setArguments(args);
+
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment_content, this.boardCreatedFragment);
+        ft.commit();
     }
 }

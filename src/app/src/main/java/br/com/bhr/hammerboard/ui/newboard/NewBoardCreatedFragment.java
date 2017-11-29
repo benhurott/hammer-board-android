@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import br.com.bhr.hammerboard.R;
+import br.com.bhr.hammerboard.domain.board.BoardEntity;
 
 /**
  * Created by ben on 28/11/2017.
@@ -29,5 +30,14 @@ public class NewBoardCreatedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         this.shareCode = view.findViewById(R.id.tv_board_share_code);
+
+        this.load();
+    }
+
+    private void load() {
+        Bundle args = getArguments();
+        BoardEntity createdBoard = (BoardEntity) args.getSerializable("board_created");
+
+        this.shareCode.setText(createdBoard.getShareCode());
     }
 }

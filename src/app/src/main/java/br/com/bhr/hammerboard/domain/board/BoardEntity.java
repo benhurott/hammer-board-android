@@ -1,12 +1,14 @@
 package br.com.bhr.hammerboard.domain.board;
 
+import java.io.Serializable;
+
 import br.com.bhr.hammerboard.domain.board.BoardTemplateType;
 
 /**
  * Created by ben on 28/11/2017.
  */
 
-public class BoardEntity {
+public class BoardEntity implements Serializable {
     private String name;
     private BoardTemplateType template;
     private String shareCode;
