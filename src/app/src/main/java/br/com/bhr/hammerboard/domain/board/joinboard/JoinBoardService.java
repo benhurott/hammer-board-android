@@ -17,9 +17,19 @@ public class JoinBoardService {
     }
 
     public void joinWithShareCode(String shareCode, final ActionResult<BoardException, BoardEntity> actionResult) {
+        if (shareCode == null || shareCode.isEmpty()) {
+            actionResult.onError(new BoardException("The share code is required."));
+            return;
+        }
+
         this.boardRepository.getByShareCode(shareCode, new ActionResult<BoardException, BoardEntity>() {
             @Override
             public void onSuccess(BoardEntity result) {
+                if (result == null) {
+                    actionResult.onError(new BoardException("This board doesn't exist."));
+                    return;
+                }
+
                 actionResult.onSuccess(result);
             }
 
