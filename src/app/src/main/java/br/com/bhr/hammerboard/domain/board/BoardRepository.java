@@ -8,4 +8,5 @@ import br.com.bhr.hammerboard.core.ActionResult;
 
 public interface BoardRepository {
     void insert(BoardEntity board, ActionResult<BoardException, BoardEntity> actionResult);
+    void getByShareCode(String shareCode, ActionResult<BoardException, BoardEntity> actionResult);
 }

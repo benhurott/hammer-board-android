@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.newboard.ChoseNewBoardTemplateActivity"></activity>
+        <activity android:name=".ui.newboard.ChoseNewBoardTemplateActivity" />
+        <activity android:name=".ui.joinboard.JoinBoardActivity"></activity>
     </application>
 
 </manifest>

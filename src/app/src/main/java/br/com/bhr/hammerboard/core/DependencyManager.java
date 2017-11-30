@@ -1,6 +1,7 @@
 package br.com.bhr.hammerboard.core;
 
 import br.com.bhr.hammerboard.domain.board.BoardRepository;
+import br.com.bhr.hammerboard.domain.board.joinboard.JoinBoardService;
 import br.com.bhr.hammerboard.domain.board.newboard.NewBoardService;
 import br.com.bhr.hammerboard.infra.repository.firebase.BoardRepositoryFIR;
 import br.com.bhr.hammerboard.infra.repository.mock.BoardRepositoryMock;
@@ -35,5 +36,14 @@ public class DependencyManager {
         }
 
         return this.newBoardService;
+    }
+
+    private JoinBoardService joinBoardService;
+    public JoinBoardService getJoinBoardService() {
+        if (this.joinBoardService == null) {
+            this.joinBoardService = new JoinBoardService(this.getBoardRepository());
+        }
+
+        return this.joinBoardService;
     }
 }

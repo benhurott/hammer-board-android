@@ -13,7 +13,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create a new board"
+        android:text="create a new board"
         android:onClick="onCreateNewBoardTouched"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="join board"
+        android:onClick="onJoinBoard"/>
 
 </LinearLayout>
