@@ -12,6 +12,7 @@ import br.com.bhr.hammerboard.R;
 import br.com.bhr.hammerboard.domain.board.BoardCardEntity;
 import br.com.bhr.hammerboard.domain.board.viewboard.BoardSectionModel;
 import br.com.bhr.hammerboard.ui.viewboard.ViewBoardActivity;
+import br.com.bhr.hammerboard.ui.viewboard.ViewBoardManager;
 
 /**
  * Created by ben on 02/12/2017.
@@ -22,9 +23,9 @@ public class ViewCardSectionListAdapter extends RecyclerView.Adapter<ViewCardSec
     private BoardSectionModel boardSectionModel;
     private ArrayList<BoardCardEntity> cards;
 
-    public ViewCardSectionListAdapter(BoardSectionModel boardSectionModel, ArrayList<BoardCardEntity> cards) {
-        this.boardSectionModel = boardSectionModel;
-        this.cards = cards;
+    public ViewCardSectionListAdapter() {
+        this.boardSectionModel = ViewBoardManager.getInstance().getSelectedSection();
+        this.cards = ViewBoardManager.getInstance().getSectionCards(this.boardSectionModel);
     }
 
     @Override
@@ -57,7 +58,6 @@ public class ViewCardSectionListAdapter extends RecyclerView.Adapter<ViewCardSec
 
             this.tvCardText = itemView.findViewById(R.id.card_text);
         }
-
 
         public BoardCardEntity getBoardCardEntity() {
             return boardCardEntity;

@@ -54,16 +54,23 @@ public class ViewBoardSectionsListAdapter extends RecyclerView.Adapter<ViewBoard
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private BoardSectionModel section;
+        private ArrayList<BoardCardEntity> cards;
+
         private ImageView ivSectionImage;
         private TextView etSectionName;
-
-        private ArrayList<BoardCardEntity> cards;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             this.ivSectionImage = itemView.findViewById(R.id.section_image);
             this.etSectionName = itemView.findViewById(R.id.section_name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    whenTouched();
+                }
+            });
         }
 
         public BoardSectionModel getSection() {
@@ -95,5 +102,14 @@ public class ViewBoardSectionsListAdapter extends RecyclerView.Adapter<ViewBoard
         private void bindCards() {
             this.etSectionName.setText(this.section.getName() + " (" + this.cards.size() + ")");
         }
+
+        private void whenTouched() {
+            ViewBoardManager.getInstance().setSectionAsSelected(this.section);
+        }
+    }
+
+
+    public interface Listener {
+        void onItemTouched(BoardSectionModel section);
     }
 }

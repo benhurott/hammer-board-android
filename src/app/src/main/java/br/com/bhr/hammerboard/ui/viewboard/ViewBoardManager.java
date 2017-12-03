@@ -30,8 +30,11 @@ public class ViewBoardManager {
     private BoardSectionModel selectedSection;
     private Map<BoardSectionModel, ArrayList<BoardCardEntity>> sectionCards;
 
+    private ArrayList<ActionResult> onSelectedSectionChangeListeners;
+
     private ViewBoardManager() {
         this.sectionCards = new HashMap<>();
+        this.onSelectedSectionChangeListeners = new ArrayList<>();
     }
 
     public BoardEntity getBoard() {
@@ -48,6 +51,10 @@ public class ViewBoardManager {
 
     public void setSectionAsSelected(BoardSectionModel section) {
         this.selectedSection = section;
+
+        for(ActionResult<BoardException, BoardSectionModel> listener: this.onSelectedSectionChangeListeners) {
+            listener.onSuccess(section);
+        }
     }
 
     public void loadSectionCards(final BoardSectionModel section, final ActionResult<BoardException, ArrayList<BoardCardEntity>> actionResult) {
@@ -55,7 +62,7 @@ public class ViewBoardManager {
         service.getCardsForSection(section, new ActionResult<BoardException, ArrayList<BoardCardEntity>>() {
             @Override
             public void onSuccess(ArrayList<BoardCardEntity> result) {
-                if (!sectionCards.containsKey(section)) {
+                if (sectionCards.containsKey(section)) {
                     ArrayList<BoardCardEntity> cards = sectionCards.get(section);
                     cards = result;
                 }
@@ -75,5 +82,14 @@ public class ViewBoardManager {
 
     public ArrayList<BoardCardEntity> getSectionCards(BoardSectionModel section) {
         return sectionCards.get(section);
+    }
+
+
+    public void addOnSelectedSectionChangeListener(ActionResult<BoardException, BoardSectionModel> listener) {
+        this.onSelectedSectionChangeListeners.add(listener);
+    }
+
+    public void removeOnSelectedSectionChangeListener(ActionResult<BoardException, BoardSectionModel> listener) {
+        this.onSelectedSectionChangeListeners.remove(listener);
     }
 }

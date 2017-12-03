@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import br.com.bhr.hammerboard.R;
 import br.com.bhr.hammerboard.domain.board.BoardEntity;
+import br.com.bhr.hammerboard.domain.board.viewboard.BoardSectionModel;
 
 /**
  * Created by ben on 02/12/2017.
@@ -18,7 +19,7 @@ import br.com.bhr.hammerboard.domain.board.BoardEntity;
 
 public class ViewBoardSectionsFragment extends Fragment {
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ViewBoardSectionsListAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Nullable
@@ -39,6 +40,7 @@ public class ViewBoardSectionsFragment extends Fragment {
         BoardEntity board = ViewBoardManager.getInstance().getBoard();
 
         mAdapter = new ViewBoardSectionsListAdapter(this);
+
         mRecyclerView.setAdapter(mAdapter);
     }
 }

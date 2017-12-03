@@ -17,7 +17,7 @@ public class BoardCardRepositoryMock implements BoardCardRepository {
         ArrayList<BoardCardEntity> list = new ArrayList<>();
 
         if (sectionId.equals("tools")) {
-            list.add(new BoardCardEntity("1", "this is a mocked card"));
+            list.add(new BoardCardEntity("1", "This is a mocked card, you cant remove me, but try and if you can, i give you a gift."));
         }
 
         actionResult.onSuccess(list);

@@ -42,11 +42,7 @@ public class ViewSectionCardListFragment extends Fragment {
         mLayoutManager = new LinearLayoutManager(this.getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        Bundle args = getArguments();
-        BoardSectionModel boardSectionModel = (BoardSectionModel) args.getSerializable("board_section");
-        ArrayList<BoardCardEntity> cards = (ArrayList<BoardCardEntity>) args.getSerializable("cards");
-
-        mAdapter = new ViewCardSectionListAdapter(boardSectionModel, cards);
+        mAdapter = new ViewCardSectionListAdapter();
         mRecyclerView.setAdapter(mAdapter);
     }
 
