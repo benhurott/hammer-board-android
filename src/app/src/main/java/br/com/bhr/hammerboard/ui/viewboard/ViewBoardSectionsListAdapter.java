@@ -1,21 +1,23 @@
 package br.com.bhr.hammerboard.ui.viewboard;
 
-import android.app.Activity;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
 import br.com.bhr.hammerboard.R;
+import br.com.bhr.hammerboard.core.ActionResult;
+import br.com.bhr.hammerboard.core.DependencyManager;
+import br.com.bhr.hammerboard.domain.board.BoardCardEntity;
 import br.com.bhr.hammerboard.domain.board.BoardEntity;
-import br.com.bhr.hammerboard.domain.board.boardsections.BoardSectionModel;
+import br.com.bhr.hammerboard.domain.board.BoardException;
+import br.com.bhr.hammerboard.domain.board.viewboard.BoardSectionModel;
+import br.com.bhr.hammerboard.domain.board.viewboard.ViewBoardService;
 
 /**
  * Created by ben on 02/12/2017.
@@ -26,8 +28,8 @@ public class ViewBoardSectionsListAdapter extends RecyclerView.Adapter<ViewBoard
     private BoardEntity boardEntity;
     private ViewBoardSectionsFragment parentContext;
 
-    public ViewBoardSectionsListAdapter(BoardEntity boardEntity, ViewBoardSectionsFragment parentContext) {
-        this.boardEntity = boardEntity;
+    public ViewBoardSectionsListAdapter(ViewBoardSectionsFragment parentContext) {
+        this.boardEntity = ViewBoardManager.getInstance().getBoard();
         this.parentContext = parentContext;
     }
 
@@ -55,6 +57,8 @@ public class ViewBoardSectionsListAdapter extends RecyclerView.Adapter<ViewBoard
         private ImageView ivSectionImage;
         private TextView etSectionName;
 
+        private ArrayList<BoardCardEntity> cards;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -68,8 +72,28 @@ public class ViewBoardSectionsListAdapter extends RecyclerView.Adapter<ViewBoard
 
         public void setSection(BoardSectionModel section) {
             this.section = section;
-            this.etSectionName.setText(section.getName());
+            this.etSectionName.setText(section.getName() + " (carregando...)");
             this.ivSectionImage.setImageResource(parentContext.getResources().getIdentifier(section.getIconName(), "mipmap", parentContext.getActivity().getPackageName()));
+            this.loadCards();
+        }
+
+        private void loadCards() {
+            ViewBoardManager.getInstance().loadSectionCards(this.section, new ActionResult<BoardException, ArrayList<BoardCardEntity>>() {
+                @Override
+                public void onSuccess(ArrayList<BoardCardEntity> result) {
+                    cards = result;
+                    bindCards();
+                }
+
+                @Override
+                public void onError(BoardException e) {
+                    Toast.makeText(parentContext.getActivity(), "Ooops! The cards cannot be loadded =(", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        private void bindCards() {
+            this.etSectionName.setText(this.section.getName() + " (" + this.cards.size() + ")");
         }
     }
 }

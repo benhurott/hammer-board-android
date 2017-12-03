@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.transition.Slide;
 import android.view.Gravity;
 
+import java.util.ArrayList;
+
 import br.com.bhr.hammerboard.R;
+import br.com.bhr.hammerboard.domain.board.BoardCardEntity;
 import br.com.bhr.hammerboard.domain.board.BoardEntity;
+import br.com.bhr.hammerboard.domain.board.viewboard.BoardSectionModel;
 import br.com.bhr.hammerboard.ui.newboard.NewBoardFormFragment;
 
 public class ViewBoardActivity extends AppCompatActivity {
@@ -21,7 +25,7 @@ public class ViewBoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_board);
 
-        this.boardEntity = (BoardEntity) getIntent().getSerializableExtra("board");
+        this.boardEntity = ViewBoardManager.getInstance().getBoard();
 
         this.setTitle(this.boardEntity.getName());
 
@@ -33,12 +37,12 @@ public class ViewBoardActivity extends AppCompatActivity {
 
         this.viewBoardSectionsFragment = new ViewBoardSectionsFragment();
 
-        Bundle args = new Bundle();
-        args.putSerializable("board", boardEntity);
-        this.viewBoardSectionsFragment.setArguments(args);
-
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.fragment_content, this.viewBoardSectionsFragment);
         ft.commit();
+    }
+
+    private void renderCardListForSection(BoardSectionModel section, ArrayList<BoardCardEntity> cards) {
+
     }
 }

@@ -3,8 +3,7 @@ package br.com.bhr.hammerboard.domain.board;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import br.com.bhr.hammerboard.domain.board.BoardTemplateType;
-import br.com.bhr.hammerboard.domain.board.boardsections.BoardSectionModel;
+import br.com.bhr.hammerboard.domain.board.viewboard.BoardSectionModel;
 
 /**
  * Created by ben on 28/11/2017.
@@ -57,20 +56,20 @@ public class BoardEntity implements Serializable {
     }
 
     private void buildSectionForPositiveNegative() {
-        this.sections.add(new BoardSectionModel("Positive", "smile_happy_bl"));
-        this.sections.add(new BoardSectionModel("Negative", "smile_negative_bl"));
+        this.sections.add(new BoardSectionModel("positive", "Positive", "smile_happy_bl"));
+        this.sections.add(new BoardSectionModel("negative","Negative", "smile_negative_bl"));
     }
 
     private void buildSectionForPositiveNegativeNewIdeas() {
-        this.sections.add(new BoardSectionModel("Positive", "smile_happy_bl"));
-        this.sections.add(new BoardSectionModel("Negative", "smile_negative_bl"));
-        this.sections.add(new BoardSectionModel("New Ideas", "new_idea"));
+        this.sections.add(new BoardSectionModel("positive","Positive", "smile_happy_bl"));
+        this.sections.add(new BoardSectionModel("negative","Negative", "smile_negative_bl"));
+        this.sections.add(new BoardSectionModel("new_ideas","New Ideas", "new_idea"));
     }
 
     private void buildSectionForTeamToolsProductOther() {
-        this.sections.add(new BoardSectionModel("Team", "team"));
-        this.sections.add(new BoardSectionModel("Tools", "tools"));
-        this.sections.add(new BoardSectionModel("Product", "product"));
-        this.sections.add(new BoardSectionModel("Others", "others"));
+        this.sections.add(new BoardSectionModel("team","Team", "team"));
+        this.sections.add(new BoardSectionModel("tools","Tools", "tools"));
+        this.sections.add(new BoardSectionModel("product","Product", "product"));
+        this.sections.add(new BoardSectionModel("others","Others", "others"));
     }
 }

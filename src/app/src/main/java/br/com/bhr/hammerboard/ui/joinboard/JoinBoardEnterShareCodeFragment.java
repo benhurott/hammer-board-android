@@ -18,6 +18,7 @@ import br.com.bhr.hammerboard.domain.board.BoardEntity;
 import br.com.bhr.hammerboard.domain.board.BoardException;
 import br.com.bhr.hammerboard.domain.board.joinboard.JoinBoardService;
 import br.com.bhr.hammerboard.ui.viewboard.ViewBoardActivity;
+import br.com.bhr.hammerboard.ui.viewboard.ViewBoardManager;
 
 /**
  * Created by ben on 29/11/2017.
@@ -57,7 +58,9 @@ public class JoinBoardEnterShareCodeFragment extends Fragment {
             @Override
             public void onSuccess(BoardEntity result) {
                 Intent viewBoardIntent = new Intent(getActivity(), ViewBoardActivity.class);
-                viewBoardIntent.putExtra("board", result);
+
+                ViewBoardManager.getInstance().setBoard(result);
+
                 getActivity().startActivity(viewBoardIntent);
             }
 
