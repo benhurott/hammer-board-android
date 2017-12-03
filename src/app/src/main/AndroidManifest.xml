@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.newboard.ChoseNewBoardTemplateActivity" />
-        <activity android:name=".ui.joinboard.JoinBoardActivity"></activity>
+        <activity android:name=".ui.joinboard.JoinBoardActivity" />
+        <activity android:name=".ui.viewboard.ViewBoardActivity"></activity>
     </application>
 
 </manifest>
