@@ -22,6 +22,8 @@ import br.com.bhr.hammerboard.ui.viewboard.cardsectionlist.ViewSectionCardListFr
 public class ViewBoardActivity extends AppCompatActivity {
 
     private ViewBoardSectionsFragment viewBoardSectionsFragment;
+    private CurrentWindow currentWindow;
+
     private BoardEntity boardEntity;
 
     private ActionResult<BoardException, BoardSectionModel> onSelectedSectionChangedListener;
@@ -64,20 +66,42 @@ public class ViewBoardActivity extends AppCompatActivity {
     }
 
     private void renderBoardSectionList() {
+        this.currentWindow = CurrentWindow.SECTION_LIST;
         FragmentManager fm = getSupportFragmentManager();
 
         this.viewBoardSectionsFragment = new ViewBoardSectionsFragment();
+        this.viewBoardSectionsFragment.setExitTransition(new Slide(Gravity.LEFT));
 
         FragmentTransaction ft = fm.beginTransaction();
-        ft.add(R.id.fragment_content, this.viewBoardSectionsFragment);
+        ft.replace(R.id.fragment_content, this.viewBoardSectionsFragment);
         ft.commit();
     }
 
     private void renderCardListForSection(BoardSectionModel section) {
+        this.currentWindow = CurrentWindow.SECTION_CARD_LIST;
         FragmentManager fm = getSupportFragmentManager();
 
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment_content, new ViewSectionCardListFragment());
+        ViewSectionCardListFragment fragment = new ViewSectionCardListFragment();
+        fragment.setEnterTransition(new Slide(Gravity.RIGHT));
+        fragment.setExitTransition(new Slide(Gravity.RIGHT));
+
+        ft.replace(R.id.fragment_content, fragment);
         ft.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.currentWindow == CurrentWindow.SECTION_LIST) {
+            super.onBackPressed();
+        }
+        else if (this.currentWindow == CurrentWindow.SECTION_CARD_LIST) {
+            this.renderBoardSectionList();
+        }
+    }
+
+    private enum CurrentWindow {
+        SECTION_LIST,
+        SECTION_CARD_LIST
     }
 }
