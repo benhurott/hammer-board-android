@@ -24,18 +24,12 @@ public class ViewBoardActivity extends AppCompatActivity {
     private ViewBoardSectionsFragment viewBoardSectionsFragment;
     private CurrentWindow currentWindow;
 
-    private BoardEntity boardEntity;
-
     private ActionResult<BoardException, BoardSectionModel> onSelectedSectionChangedListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_board);
-
-        this.boardEntity = ViewBoardManager.getInstance().getBoard();
-
-        this.setTitle(this.boardEntity.getName());
 
         this.setupListeners();
 
@@ -66,6 +60,7 @@ public class ViewBoardActivity extends AppCompatActivity {
     }
 
     private void renderBoardSectionList() {
+        this.setTitle(ViewBoardManager.getInstance().getBoard().getName());
         this.currentWindow = CurrentWindow.SECTION_LIST;
         FragmentManager fm = getSupportFragmentManager();
 
@@ -78,6 +73,10 @@ public class ViewBoardActivity extends AppCompatActivity {
     }
 
     private void renderCardListForSection(BoardSectionModel section) {
+        String boardName = ViewBoardManager.getInstance().getBoard().getName();
+        String sectionName = section.getName();
+        this.setTitle(boardName + " > " + sectionName);
+
         this.currentWindow = CurrentWindow.SECTION_CARD_LIST;
         FragmentManager fm = getSupportFragmentManager();
 
