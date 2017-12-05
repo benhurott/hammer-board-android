@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light">
+    android:background="@android:color/background_light"
+    android:animateLayoutChanges="true">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/card_list"
@@ -11,6 +12,7 @@
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_new_card_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -19,5 +21,47 @@
         android:layout_marginRight="20dp"
         android:src="@mipmap/new_card"
         />
+
+    <RelativeLayout
+        android:id="@+id/new_card_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CC000000"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <EditText
+                android:id="@+id/new_card_text"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <Button
+                android:id="@+id/create_card_button"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/colorAccent"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="10dp"
+                android:text="create card"/>
+
+            <TextView
+                android:id="@+id/cancel_button"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:text="cancel"
+                android:textAlignment="center"
+                android:gravity="center_vertical"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -2,12 +2,16 @@ package br.com.bhr.hammerboard.ui.viewboard.cardsectionlist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,6 +31,11 @@ public class ViewSectionCardListFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private View view;
+    private View addNewCardForm;
+    private FloatingActionButton addNewCardButton;
+    private EditText newCardText;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,6 +46,8 @@ public class ViewSectionCardListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        this.view = view;
+
         this.mRecyclerView = view.findViewById(R.id.card_list);
 
         mLayoutManager = new LinearLayoutManager(this.getActivity());
@@ -44,7 +55,50 @@ public class ViewSectionCardListFragment extends Fragment {
 
         mAdapter = new ViewCardSectionListAdapter();
         mRecyclerView.setAdapter(mAdapter);
+
+        this.addNewCardForm = view.findViewById(R.id.new_card_form);
+        this.addNewCardButton = this.view.findViewById(R.id.add_new_card_button);
+        this.newCardText = this.view.findViewById(R.id.new_card_text);
+
+        this.configActions();
     }
 
 
+    private void configActions() {
+        addNewCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openNewCardForm();
+            }
+        });
+
+        this.view.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeNewCardForm();
+            }
+        });
+
+        this.view.findViewById(R.id.create_card_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createCard();
+            }
+        });
+    }
+
+    private void openNewCardForm() {
+        this.addNewCardButton.setVisibility(View.INVISIBLE);
+        this.addNewCardForm.bringToFront();
+        this.addNewCardForm.setVisibility(View.VISIBLE);
+    }
+
+    private void closeNewCardForm() {
+        this.addNewCardForm.setVisibility(View.INVISIBLE);
+        this.addNewCardButton.setVisibility(View.VISIBLE);
+    }
+
+    private void createCard() {
+
+    }
 }

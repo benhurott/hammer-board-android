@@ -84,7 +84,6 @@ public class ViewBoardManager {
         return sectionCards.get(section);
     }
 
-
     public void addOnSelectedSectionChangeListener(ActionResult<BoardException, BoardSectionModel> listener) {
         this.onSelectedSectionChangeListeners.add(listener);
     }
