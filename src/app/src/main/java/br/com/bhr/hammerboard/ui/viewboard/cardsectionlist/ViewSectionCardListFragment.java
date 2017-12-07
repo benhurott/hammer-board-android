@@ -19,6 +19,7 @@ import br.com.bhr.hammerboard.R;
 import br.com.bhr.hammerboard.domain.board.BoardCardEntity;
 import br.com.bhr.hammerboard.domain.board.BoardEntity;
 import br.com.bhr.hammerboard.domain.board.viewboard.BoardSectionModel;
+import br.com.bhr.hammerboard.ui.utils.KeyboardUtils;
 import br.com.bhr.hammerboard.ui.viewboard.ViewBoardSectionsListAdapter;
 
 /**
@@ -91,9 +92,12 @@ public class ViewSectionCardListFragment extends Fragment {
         this.addNewCardButton.setVisibility(View.INVISIBLE);
         this.addNewCardForm.bringToFront();
         this.addNewCardForm.setVisibility(View.VISIBLE);
+
+        KeyboardUtils.openKeyboardForEditText(this.getActivity(), this.newCardText);
     }
 
     private void closeNewCardForm() {
+        KeyboardUtils.hideKeyboard(this.getActivity());
         this.addNewCardForm.setVisibility(View.INVISIBLE);
         this.addNewCardButton.setVisibility(View.VISIBLE);
     }

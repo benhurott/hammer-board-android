@@ -6,6 +6,7 @@ import br.com.bhr.hammerboard.core.ActionResult;
 import br.com.bhr.hammerboard.domain.board.BoardCardEntity;
 import br.com.bhr.hammerboard.domain.board.BoardCardRepository;
 import br.com.bhr.hammerboard.domain.board.BoardException;
+import br.com.bhr.hammerboard.domain.board.viewboard.card.NewCardModel;
 
 /**
  * Created by ben on 02/12/2017.
@@ -23,5 +24,10 @@ public class BoardCardRepositoryMock implements BoardCardRepository {
         }
 
         actionResult.onSuccess(list);
+    }
+
+    @Override
+    public void createNewCard(NewCardModel model, ActionResult<BoardException, BoardCardEntity> actionResult) {
+        actionResult.onSuccess(new BoardCardEntity("123", model.getText()));
     }
 }
