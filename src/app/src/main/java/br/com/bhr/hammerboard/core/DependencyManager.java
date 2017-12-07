@@ -5,6 +5,8 @@ import br.com.bhr.hammerboard.domain.board.BoardRepository;
 import br.com.bhr.hammerboard.domain.board.joinboard.JoinBoardService;
 import br.com.bhr.hammerboard.domain.board.newboard.NewBoardService;
 import br.com.bhr.hammerboard.domain.board.viewboard.ViewBoardService;
+import br.com.bhr.hammerboard.domain.board.viewboard.card.BoardCardService;
+import br.com.bhr.hammerboard.infra.repository.firebase.BoardCardRepositoryFIR;
 import br.com.bhr.hammerboard.infra.repository.firebase.BoardRepositoryFIR;
 import br.com.bhr.hammerboard.infra.repository.mock.BoardCardRepositoryMock;
 import br.com.bhr.hammerboard.infra.repository.mock.BoardRepositoryMock;
@@ -35,7 +37,7 @@ public class DependencyManager {
     private BoardCardRepository boardCardRepository;
     private BoardCardRepository getBoardCardRepository() {
         if (this.boardCardRepository == null) {
-            this.boardCardRepository = new BoardCardRepositoryMock();
+            this.boardCardRepository = new BoardCardRepositoryFIR();
         }
 
         return  this.boardCardRepository;
@@ -66,5 +68,14 @@ public class DependencyManager {
         }
 
         return this.viewBoardService;
+    }
+
+    private BoardCardService boardCardService;
+    public BoardCardService getBoardCardService() {
+        if (this.boardCardService == null) {
+            this.boardCardService = new BoardCardService(this.getBoardCardRepository());
+        }
+
+        return this.boardCardService;
     }
 }

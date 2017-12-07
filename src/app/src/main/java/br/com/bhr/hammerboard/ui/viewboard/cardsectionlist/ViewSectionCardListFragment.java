@@ -16,10 +16,16 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import br.com.bhr.hammerboard.R;
+import br.com.bhr.hammerboard.core.ActionResult;
+import br.com.bhr.hammerboard.core.DependencyManager;
 import br.com.bhr.hammerboard.domain.board.BoardCardEntity;
 import br.com.bhr.hammerboard.domain.board.BoardEntity;
+import br.com.bhr.hammerboard.domain.board.BoardException;
 import br.com.bhr.hammerboard.domain.board.viewboard.BoardSectionModel;
+import br.com.bhr.hammerboard.domain.board.viewboard.card.BoardCardService;
+import br.com.bhr.hammerboard.domain.board.viewboard.card.NewCardModel;
 import br.com.bhr.hammerboard.ui.utils.KeyboardUtils;
+import br.com.bhr.hammerboard.ui.viewboard.ViewBoardManager;
 import br.com.bhr.hammerboard.ui.viewboard.ViewBoardSectionsListAdapter;
 
 /**
@@ -100,9 +106,25 @@ public class ViewSectionCardListFragment extends Fragment {
         KeyboardUtils.hideKeyboard(this.getActivity());
         this.addNewCardForm.setVisibility(View.INVISIBLE);
         this.addNewCardButton.setVisibility(View.VISIBLE);
+        this.newCardText.getText().clear();
     }
 
     private void createCard() {
+        BoardSectionModel section = ViewBoardManager.getInstance().getSelectedSection();
+        NewCardModel model = new NewCardModel(this.newCardText.getText().toString(), section);
+        BoardCardService boardCardService = DependencyManager.getInstance().getBoardCardService();
 
+        boardCardService.createCard(model, new ActionResult<BoardException, BoardCardEntity>() {
+            @Override
+            public void onSuccess(BoardCardEntity result) {
+                Toast.makeText(getActivity(), "Card created =).", Toast.LENGTH_SHORT).show();
+                closeNewCardForm();
+            }
+
+            @Override
+            public void onError(BoardException e) {
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

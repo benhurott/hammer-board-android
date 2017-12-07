@@ -20,6 +20,8 @@ public class ViewBoardService {
     }
 
     public void getCardsForSection(BoardSectionModel boardSectionModel, ActionResult<BoardException, ArrayList<BoardCardEntity>> actionResult) {
-        this.boardCardRepository.getCardsForSection(boardSectionModel.getId(), actionResult);
+        this.boardCardRepository.getCardsForSection(boardSectionModel, actionResult);
     }
+
+
 }

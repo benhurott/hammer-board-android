@@ -56,20 +56,20 @@ public class BoardEntity implements Serializable {
     }
 
     private void buildSectionForPositiveNegative() {
-        this.sections.add(new BoardSectionModel("positive", "Positive", "smile_happy_bl"));
-        this.sections.add(new BoardSectionModel("negative","Negative", "smile_negative_bl"));
+        this.sections.add(new BoardSectionModel("positive", "Positive", "smile_happy_bl", this));
+        this.sections.add(new BoardSectionModel("negative","Negative", "smile_negative_bl", this));
     }
 
     private void buildSectionForPositiveNegativeNewIdeas() {
-        this.sections.add(new BoardSectionModel("positive","Positive", "smile_happy_bl"));
-        this.sections.add(new BoardSectionModel("negative","Negative", "smile_negative_bl"));
-        this.sections.add(new BoardSectionModel("new_ideas","New Ideas", "new_idea"));
+        this.sections.add(new BoardSectionModel("positive","Positive", "smile_happy_bl", this));
+        this.sections.add(new BoardSectionModel("negative","Negative", "smile_negative_bl", this));
+        this.sections.add(new BoardSectionModel("new_ideas","New Ideas", "new_idea", this));
     }
 
     private void buildSectionForTeamToolsProductOther() {
-        this.sections.add(new BoardSectionModel("team","Team", "team"));
-        this.sections.add(new BoardSectionModel("tools","Tools", "tools"));
-        this.sections.add(new BoardSectionModel("product","Product", "product"));
-        this.sections.add(new BoardSectionModel("others","Others", "others"));
+        this.sections.add(new BoardSectionModel("team","Team", "team", this));
+        this.sections.add(new BoardSectionModel("tools","Tools", "tools", this));
+        this.sections.add(new BoardSectionModel("product","Product", "product", this));
+        this.sections.add(new BoardSectionModel("others","Others", "others", this));
     }
 }
