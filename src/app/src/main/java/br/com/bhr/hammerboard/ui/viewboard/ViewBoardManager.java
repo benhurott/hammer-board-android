@@ -63,12 +63,10 @@ public class ViewBoardManager {
             @Override
             public void onSuccess(ArrayList<BoardCardEntity> result) {
                 if (sectionCards.containsKey(section)) {
-                    ArrayList<BoardCardEntity> cards = sectionCards.get(section);
-                    cards = result;
+                    sectionCards.remove(section);
                 }
-                else {
-                    sectionCards.put(section, result);
-                }
+
+                sectionCards.put(section, result);
 
                 actionResult.onSuccess(result);
             }

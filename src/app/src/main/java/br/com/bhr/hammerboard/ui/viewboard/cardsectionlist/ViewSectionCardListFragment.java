@@ -110,7 +110,7 @@ public class ViewSectionCardListFragment extends Fragment {
     }
 
     private void createCard() {
-        BoardSectionModel section = ViewBoardManager.getInstance().getSelectedSection();
+        final BoardSectionModel section = ViewBoardManager.getInstance().getSelectedSection();
         NewCardModel model = new NewCardModel(this.newCardText.getText().toString(), section);
         BoardCardService boardCardService = DependencyManager.getInstance().getBoardCardService();
 
@@ -119,6 +119,18 @@ public class ViewSectionCardListFragment extends Fragment {
             public void onSuccess(BoardCardEntity result) {
                 Toast.makeText(getActivity(), "Card created =).", Toast.LENGTH_SHORT).show();
                 closeNewCardForm();
+
+                ViewBoardManager.getInstance().loadSectionCards(section, new ActionResult<BoardException, ArrayList<BoardCardEntity>>() {
+                    @Override
+                    public void onSuccess(ArrayList<BoardCardEntity> result) {
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(BoardException e) {
+                        mAdapter.notifyDataSetChanged();
+                    }
+                });
             }
 
             @Override

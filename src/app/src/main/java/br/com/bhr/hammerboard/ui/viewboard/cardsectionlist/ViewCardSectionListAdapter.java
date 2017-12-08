@@ -20,12 +20,7 @@ import br.com.bhr.hammerboard.ui.viewboard.ViewBoardManager;
 
 public class ViewCardSectionListAdapter extends RecyclerView.Adapter<ViewCardSectionListAdapter.ViewHolder> {
 
-    private BoardSectionModel boardSectionModel;
-    private ArrayList<BoardCardEntity> cards;
-
     public ViewCardSectionListAdapter() {
-        this.boardSectionModel = ViewBoardManager.getInstance().getSelectedSection();
-        this.cards = ViewBoardManager.getInstance().getSectionCards(this.boardSectionModel);
     }
 
     @Override
@@ -39,12 +34,12 @@ public class ViewCardSectionListAdapter extends RecyclerView.Adapter<ViewCardSec
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.setBoardCardEntity(this.cards.get(position));
+        holder.setBoardCardEntity(this.getCards().get(position));
     }
 
     @Override
     public int getItemCount() {
-        return this.cards.size();
+        return this.getCards().size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,5 +63,13 @@ public class ViewCardSectionListAdapter extends RecyclerView.Adapter<ViewCardSec
 
             this.tvCardText.setText(this.boardCardEntity.getText());
         }
+    }
+
+    private BoardSectionModel getBoardSectionModel() {
+        return ViewBoardManager.getInstance().getSelectedSection();
+    }
+
+    private ArrayList<BoardCardEntity> getCards() {
+        return ViewBoardManager.getInstance().getSectionCards(this.getBoardSectionModel());
     }
 }
