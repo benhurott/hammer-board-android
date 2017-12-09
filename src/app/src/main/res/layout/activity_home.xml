@@ -8,18 +8,56 @@
     android:orientation="vertical"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
-    tools:context="br.com.bhr.hammerboard.HomeActivity">
+    tools:context="br.com.bhr.hammerboard.HomeActivity"
+    >
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="create a new board"
-        android:onClick="onCreateNewBoardTouched"/>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="join board"
-        android:onClick="onJoinBoard"/>
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:onClick="onCreateNewBoardTouched">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/whiteboard"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create a new board"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:onClick="onJoinBoard">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@mipmap/enter_share_code"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Join board"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>
